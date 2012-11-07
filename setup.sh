@@ -11,6 +11,8 @@ mkdir -p $MAIN_DIR
 
 $HERE/manual-steps.sh
 
+$HERE/apache.sh
+
 $HERE/homebrew.sh
 
 $HERE/node-npm.sh
