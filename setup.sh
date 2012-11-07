@@ -9,7 +9,7 @@ echo "Start Declarativ setup..."
 
 mkdir -p $MAIN_DIR
 
-$HERE/manual-steps.sh
+$HERE/command-line-tools.sh
 
 $HERE/apache.sh
 
@@ -18,6 +18,10 @@ $HERE/homebrew.sh
 $HERE/node-npm.sh
 
 $HERE/utilities.sh
+
+$HERE/ssh-key.sh
+
+$HERE/git.sh
 
 cd $MAIN_DIR
 $HERE/repos.sh
