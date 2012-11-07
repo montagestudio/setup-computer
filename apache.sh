@@ -24,5 +24,6 @@ mkdir "$USER_WEBROOT"
 sudo apachectl start
 
 echo "Files are served from $USER_WEBROOT"
+echo "Files can be accessed at http://localhost/~$USER"
 
 echo "Done $NAME."
