@@ -9,6 +9,6 @@ echo "Start $NAME..."
 brew install wget
 
 # Grep for code. http://betterthangrep.com/
-brew install awk
+brew install ack
 
 echo "Done $NAME."
