@@ -23,6 +23,8 @@ $HERE/ssh-key.sh
 
 $HERE/git.sh
 
+$HERE/bash_profile.sh
+
 cd $MAIN_DIR
 $HERE/repos.sh
 cd $HERE

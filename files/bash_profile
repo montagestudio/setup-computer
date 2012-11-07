@@ -1,0 +1,9 @@
+# Add ~/bin to path
+export PATH="$HOME/bin:$PATH"
+
+# Git completion
+source "$HOME/bin/git-completion.bash"
+source "$HOME/bin/git-prompt.sh"
+
+# Bash prompt with Git
+export PS1='\W\[\e[1;30m\]$(__git_ps1 ":%s")\[\e[m\]$ '
