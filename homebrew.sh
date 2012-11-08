@@ -13,7 +13,7 @@ sudo chown -R `whoami` "$HOMEBREW_DIR"
 curl -L https://github.com/mxcl/homebrew/tarball/master | tar xz --strip 1 -C "$HOMEBREW_DIR"
 
 # Add homebrew bin folder to $PATH
-echo 'export PATH="$HOMEBREW_DIR/bin:$PATH"' >> ~/.profile
+echo "export PATH=\"$HOMEBREW_DIR/bin:\$PATH\"" >> ~/.profile
 source ~/.profile
 
 echo "Done $NAME."
