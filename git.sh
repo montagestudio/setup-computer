@@ -18,6 +18,7 @@ git config --global user.email "$EMAIL"
 
 git config --global alias.co checkout
 git config --global alias.st status
+git config --global alias.all "fetch --all"
 
 git config --global color.ui true
 
