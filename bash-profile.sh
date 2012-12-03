@@ -6,15 +6,35 @@ NAME="bash profile setup"
 
 echo "Start $NAME..."
 
-BIN_DIR="$HOME/bin"
+
+export BIN_DIR=$DECLARATIVBASEDIR/bin
 
 
-mkdir $BIN_DIR
-wget https://raw.github.com/git/git/master/contrib/completion/git-completion.bash -O $BIN_DIR/git-completion.bash
-wget https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh -O $BIN_DIR/git-prompt.sh
+if [[ ! -d $BIN_DIR ]]; then
+	mkdir -p $BIN_DIR
+fi
 
-cat files/bash_profile >> $HOME/.bash_profile
+pushd $BIN_DIR
+
+COMPLETIONINSTALLED=`cat ~/.bash_profile | grep git-completion`
+if [[ $COMPLETIONINSTALLED == "" ]]; then
+	curl -O https://raw.github.com/git/git/master/contrib/completion/git-completion.bash
+	chmod +x git-completion.bash
+	echo "" >> ~/.bash_profile
+	echo "# Git completion" >> ~/.bash_profile
+	echo "source "$BIN_DIR/git-completion.bash >> ~/.bash_profile
+fi
+
+PROMPTINSTALLED=`cat ~/.bash_profile | grep git-prompt`
+if [[ $PROMPTINSTALLED == "" ]]; then
+	curl -O  https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh
+	chmod +x git-prompt.sh
+	echo "source "$BIN_DIR/git-prompt.sh >> ~/.bash_profile
+	echo "export PS1='\h:\W \u\[\e[1;30m\]\$(__git_ps1 \":%s\")\[\e[m\]$ '" >> ~/.bash_profile
+fi
 
 source ~/.bash_profile
+
+popd
 
 echo "Done $NAME."

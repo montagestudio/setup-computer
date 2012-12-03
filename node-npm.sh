@@ -6,13 +6,37 @@ NAME="Node and NPM install"
 
 echo "Start $NAME..."
 
-HOMEBREW_DIR="/usr/local/homebrew"
+export TMP_DIR=$DECLARATIVBASEDIR/tmp
 
-echo "prefix = $HOMEBREW_DIR/share/npm" > ~/.npmrc
+rm -rf $TMP_DIR
+mkdir -p $TMP_DIR
 
-echo '# Add NPM bin path to PATH' >> ~/.bash_profile
-echo 'export PATH="/usr/local/homebrew/share/npm/bin/:$PATH"' >> ~/.bash_profile
+NODEWEBSITE="http://nodejs.org/dist/latest/"
 
-brew install node
+NODEINSTALLER=`curl -s $NODEWEBSITE | grep "pkg" | cut -d'>' -f 2 | cut -d'<' -f 1`
+NODEVERSION=`echo $NODEINSTALLER | cut -d'-' -f 2 | cut -d '.' -f '1 2 3'`
+NODEURL=$NODEWEBSITE$NODEINSTALLER
+CURRENTNODEVERSION=`node --version`
+
+if [[ $CURRENTNODEVERSION != $NODEVERSION ]]; then
+	echo "Updating node";
+	if [[ -d $TMP_DIR ]]; then
+		pushd $TMP_DIR
+	else
+		pushd /tmp
+	fi
+	curl -O $NODEURL
+	echo `sudo installer -pkg $NODEINSTALLER -target /`
+	popd
+else
+	echo "Node is up-to-date"
+fi
+CURRENTNODEVERSION=`node --version`
+
+CURRENTNPMVERSION=`npm --version`
+
+echo "This machine has node "$CURRENTNODEVERSION" and npm "$CURRENTNPMVERSION" installed"
+
+rm -rf $TMP_DIR
 
 echo "Done $NAME."
