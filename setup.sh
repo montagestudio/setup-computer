@@ -11,29 +11,48 @@ function --- {
 
 HERE="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-BASEDIR=$HERE/..
+SELFUPDATE=".selfupdate"
 
-pushd $BASEDIR
-export DECLARATIVBASEDIR=`pwd`
-popd
+if [[ -e $SELFUPDATE ]]; then
+	rm -rf $SELFUPDATE
 
-echo "Start Declarativ setup..."
----
-$HERE/command-line-tools.sh
----
-# $HERE/homebrew.sh
----
-$HERE/node-npm.sh
----
-$HERE/git.sh
----
-$HERE/ssh-key.sh
----
-$HERE/bash-profile.sh
----
-$HERE/repos.sh
----
-# Apache need the project in place or the configuration will fail
-$HERE/apache.sh
+	BASEDIR=$HERE/..
 
-echo "Done Declarativ setup."
+	pushd $BASEDIR
+	export DECLARATIVBASEDIR=`pwd`
+	popd
+
+	echo "Start Declarativ setup..."
+	---
+	$HERE/command-line-tools.sh
+	---
+	# $HERE/homebrew.sh
+	---
+	$HERE/node-npm.sh
+	---
+	$HERE/git.sh
+	---
+	$HERE/ssh-key.sh
+	---
+	$HERE/bash-profile.sh
+	---
+	$HERE/repos.sh
+	---
+	# Apache need the project in place or the configuration will fail
+	$HERE/apache.sh
+
+	echo "Done Declarativ setup."
+	exit
+else
+	touch $SELFUPDATE
+	
+	RELAUNCH="${BASH_SOURCE[0]}"
+	
+	pushd $HERE
+	git fetch --all
+	git rebase origin/master
+	popd
+	
+	bash $RELAUNCH
+	exit
+fi
