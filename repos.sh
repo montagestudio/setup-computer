@@ -6,7 +6,7 @@ NAME="clone repos"
 
 echo "Start $NAME..."
 
-export GITHUB="github-declarativ"
+export GITHUB="github.com"
 
 export MAIN_DIR=$DECLARATIVBASEDIR/declarativ
 
