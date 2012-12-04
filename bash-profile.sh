@@ -1,6 +1,9 @@
 #!/bin/bash
 
 # Setup bash profile
+#
+# Assume that $DECLARATIVBASEDIR is set and point to the current directory where the setup is done
+#
 
 NAME="bash profile setup"
 

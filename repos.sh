@@ -1,6 +1,9 @@
 #!/bin/bash
 
 # Clones all the Declarativ repos to the current working directory.
+#
+# Assume that $DECLARATIVBASEDIR is set and point to the current directory where the setup is done
+#
 
 NAME="clone repos"
 
@@ -32,6 +35,10 @@ function checkout
 
 function installpackages
 {
+	# This will install the packages for each module using npm install
+	# It will then replace installed projects with softl link between projects
+	# we do not use npm link as we don't want global machine link but a local link
+	#
 	PROJECTDIR=$1
 	if [[ $PROJECTDIR == "" ]]; then
 		PROJECTDIR=`pwd`

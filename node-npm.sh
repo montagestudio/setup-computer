@@ -1,6 +1,9 @@
 #!/bin/bash
 
 # Installs Node and NPM.
+#
+# Assume that $DECLARATIVBASEDIR is set and point to the current directory where the setup is done
+#
 
 NAME="Node and NPM install"
 

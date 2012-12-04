@@ -1,14 +1,18 @@
 #!/bin/bash
 
 # Sets up Apache
+#
+# Assume that $DECLARATIVBASEDIR is set and point to the current directory where the setup is done
+#
+# Depending on your preferences you may want to change the server port
+#
+MACOSXSERVERPORT=8082
 
 NAME="Apache setup"
 
 echo "Start $NAME..."
 
 ISSERVERINSTALLED=`serverinfo --software`
-
-MACOSXSERVERPORT=8082
 
 if [[ $ISSERVERINSTALLED != "" ]]; then
 	echo "MacOS X Server configuration"
