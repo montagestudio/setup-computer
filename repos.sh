@@ -91,21 +91,21 @@ installpackages $MAIN_DIR
 popd
 
 checkout "filament" "declarativ"
-# palette and flow-editor are not in npm so we need to add them in the dependencies
+# palette and flow-editor are not in npm so we need to hack the package.json file to make it work
 # We should fix that with a private npm repository
 cp package.json package.json.saved
-cat package.json.saved | grep -v "palette" | grep -v "flow-editor" | sed '/,$/ { N 
-/\n.*\}/ s/,.*\n.*\}/\
-\}/ 
-}' > package.json 
+cat package.json.saved | sed s/github.com/$GITHUB/ > package.json
+pushd component-editor
+cp package.json package.json.saved
+cat package.json.saved | sed s/github.com/$GITHUB/ > package.json
+popd
 
 installpackages $MAIN_DIR
 
-pushd node_modules
-rm -rf palette
-ln -s $MAIN_DIR/palette palette
-rm -rf flow-editor
-ln -s $MAIN_DIR/flow-editor flow-editor
+# cleanup after ourselves
+pushd component-editor
+rm -rf package.json
+mv package.json.saved package.json
 popd
 rm -rf package.json
 mv package.json.saved package.json
@@ -113,6 +113,11 @@ popd
 
 checkout "lumieres" "declarativ"
 # npm install is done in the xcode build so no need to do it
+# just clean the node_modules
+pushd lumieres/server/
+rm -rf node_modules
+npm install
+popd
 XCODEPATH=`xcode-select --print-path`
 echo "build lumières using "$XCODEPATH
 xcodebuild clean build -configuration Release
