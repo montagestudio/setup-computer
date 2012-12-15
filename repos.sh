@@ -95,18 +95,10 @@ checkout "filament" "declarativ"
 # We should fix that with a private npm repository
 cp package.json package.json.saved
 cat package.json.saved | sed s/github.com/$GITHUB/ > package.json
-pushd component-editor
-cp package.json package.json.saved
-cat package.json.saved | sed s/github.com/$GITHUB/ > package.json
-popd
 
 installpackages $MAIN_DIR
 
 # cleanup after ourselves
-pushd component-editor
-rm -rf package.json
-mv package.json.saved package.json
-popd
 rm -rf package.json
 mv package.json.saved package.json
 popd
