@@ -9,7 +9,9 @@ NAME="clone repos"
 
 echo "Start $NAME..."
 
-export GITHUB="github.com"
+if [[ $GITHUBDECLARATIV == "" ]]; then
+	export GITHUBDECLARATIV="github.com"
+fi
 
 export MAIN_DIR=$DECLARATIVBASEDIR/declarativ
 
@@ -26,11 +28,20 @@ function checkout
 	echo "* Updating $1 from $2 *"
 	echo "****************************************"
 	if [[ ! -d $1 ]]; then
-		git clone git@$GITHUB:$2/$1.git
+		git clone git@$GITHUBDECLARATIV:$2/$1.git
 	fi
 	pushd $1
 	git fetch --all
 	git rebase origin/master
+	GITSTATUS=`git status --short`
+	if [[ $GITSTATUS != "" ]]; then
+		echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+		echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+		echo "! Cannot update $1 because of uncommited changes !"
+		echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+		echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+		exit -1;
+	fi
 }
 
 function installpackages
@@ -64,6 +75,11 @@ function installpackages
 
 checkout "mr" "montagejs"
 installpackages $MAIN_DIR
+# This is a special case for mr
+pushd node_modules
+	rm -rf q
+	ln -s ../packages/q q
+popd
 popd
 
 checkout "collections" "montagejs"
@@ -94,7 +110,7 @@ checkout "filament" "declarativ"
 # palette and flow-editor are not in npm so we need to hack the package.json file to make it work
 # We should fix that with a private npm repository
 cp package.json package.json.saved
-cat package.json.saved | sed s/github.com/$GITHUB/ > package.json
+cat package.json.saved | sed s/github.com/$GITHUBDECLARATIV/ > package.json
 
 installpackages $MAIN_DIR
 
