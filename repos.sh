@@ -94,6 +94,13 @@ checkout "montage" "montagejs"
 installpackages $MAIN_DIR
 popd
 
+checkout "minit" "montagejs"
+popd
+
+checkout "mop" "montagejs"
+installpackages $MAIN_DIR
+popd
+
 checkout "palette" "declarativ"
 installpackages $MAIN_DIR
 # Palette has 2 sets of dependencies so we need 2 runs
