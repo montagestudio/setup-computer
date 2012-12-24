@@ -31,6 +31,7 @@ function checkout
 		git clone git@$GITHUBDECLARATIV:$2/$1.git
 	fi
 	pushd $1
+	rm -f npm-debug.log
 	git fetch --all
 	git rebase origin/master
 	GITSTATUS=`git status --short`
