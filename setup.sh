@@ -50,7 +50,14 @@ else
 	
 	pushd $HERE
 	git fetch --all
+	GITSTATUS=`git status --short`
+	if [[ $GITSTATUS != "" ]]; then
+		git stash
+	fi
 	git rebase origin/master
+	if [[ $GITSTATUS != "" ]]; then
+		git stash pop
+	fi
 	popd
 	
 	bash $RELAUNCH
