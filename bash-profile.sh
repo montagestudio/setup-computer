@@ -36,6 +36,13 @@ if [[ $PROMPTINSTALLED == "" ]]; then
 	echo "export PS1='\h:\W \u\[\e[1;30m\]\$(__git_ps1 \":%s\")\[\e[m\]$ '" >> ~/.bash_profile
 fi
 
+SUBTREEINSTALLED=`which git-subtree`
+if [[ $PROMPTINSTALLED == "" ]]; then
+	curl -O  https://raw.github.com/git/git/master/contrib/subtree/git-subtree.sh
+	chmod +x git-subtree.sh
+	mv git-subtree.sh git-subtree
+fi
+
 source ~/.bash_profile
 
 popd
