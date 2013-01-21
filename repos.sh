@@ -118,6 +118,14 @@ checkout "montage" "montagejs"
 installpackages $MAIN_DIR
 popd
 
+checkout "montage-native" "montagejs"
+installpackages $MAIN_DIR
+popd
+
+checkout "matte" "montagejs"
+installpackages $MAIN_DIR
+popd
+
 checkout "digit" "montagejs"
 installpackages $MAIN_DIR
 popd
