@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="apple-touch-icon-144x144-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="apple-touch-icon-114x114-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="apple-touch-icon-72x72-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">
+
+	<title>Hangout</title>
+	
+	<style>
+	#button {
+	    position: fixed;
+	    left: 0;
+	    top: 0;
+	    right: 0;
+	    bottom: 0;
+	    background-color: #000;
+	    opacity: 0.8;
+		text-decoration: none;
+		padding:20px;
+		color: white;
+	}
+	</style>
+
+</head>
+<body>
+<a href="https://plus.google.com/hangouts/_/89494acc7ec8997eee72c7b550e610130861b2c0" id="button">You need to bookmark this page on the Home Screen.<br>On Android, tapping the screen will take you to the hangout.</a></body>
+<script type="text/javascript">
+if (navigator.standalone) {
+	var evt = document.createEvent("MouseEvents");
+	evt.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+    document.getElementById("button").dispatchEvent(evt);
+}
+</script>
+</html>
