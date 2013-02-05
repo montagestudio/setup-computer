@@ -12,7 +12,7 @@ NAME="Apache setup"
 
 echo "Start $NAME..."
 
-ISSERVERINSTALLED=`serverinfo --software`
+ISSERVERINSTALLED=`serverinfo -q --software`
 
 if [[ $ISSERVERINSTALLED != "" ]]; then
 	echo "MacOS X Server configuration"
