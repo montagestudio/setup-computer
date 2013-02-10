@@ -12,9 +12,9 @@ NAME="Apache setup"
 
 echo "Start $NAME..."
 
-ISSERVERINSTALLED=`serverinfo -q --software`
+ISSERVERINSTALLED=`serverinfo --software | grep "NOT"`
 
-if [[ $ISSERVERINSTALLED != "" ]]; then
+if [[ $ISSERVERINSTALLED == "" ]]; then
 	echo "MacOS X Server configuration"
 	APACHE_CONFIG_FILE="/Library/Server/Web/Config/apache2/other/montage-declarativ.conf"
 	if [[ -e $APACHE_CONFIG_FILE ]]; then

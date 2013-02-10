@@ -110,6 +110,10 @@ checkout "frb" "montagejs"
 installpackages $MAIN_DIR
 popd
 
+checkout "mousse" "montagejs"
+installpackages $MAIN_DIR
+popd
+
 checkout "montage" "montagejs"
 installpackages $MAIN_DIR
 popd
