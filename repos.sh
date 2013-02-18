@@ -34,33 +34,22 @@ function checkout
 	rm -f npm-debug.log
 	git fetch --all
 	branchname=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
+
+	GITSTATUS=`git status --short -u no`
+	if [[ $GITSTATUS != "" ]]; then
+		echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+		echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+		echo "! Cannot update $1 because of uncommited changes on $branchname !"
+		echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+		echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+		exit -1;
+	fi
+
 	if [[ $branchname == "master" ]]; then
-		# the project is on master if there is any chnage we should fail.
-		GITSTATUS=`git status --short`
-		if [[ $GITSTATUS != "" ]]; then
-			echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-			echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-			echo "! Cannot update $1 because of uncommited changes on master !"
-			echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-			echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-			exit -1;
-		fi
 		git rebase remotes/origin/master
 	else
-		# the project is on branch lets update master and try to rebase the branch
-		git branch -f master remotes/origin/master
-		# We should try to update the branch if it applies cleanly otherwise leave it alone
-		GITSTATUS=`git status --short`
-		if [[ $GITSTATUS != "" ]]; then
-			echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-			echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-			echo "! Cannot update $1 because of uncommited changes on $branchname !"
-			echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-			echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-			exit -1;
-		else
-			git rebase remotes/origin/master
-		fi
+        git rebase master remotes/origin/master
+		git co $branchname
 	fi
 }
 
