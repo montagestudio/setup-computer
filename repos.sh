@@ -124,6 +124,7 @@ installpackages $MAIN_DIR
 popd
 
 checkout "minit" "montagejs"
+installpackages $MAIN_DIR
 popd
 
 checkout "mop" "montagejs"
