@@ -165,8 +165,15 @@ npm install
 popd
 XCODEPATH=`xcode-select --print-path`
 echo "build lumières using "$XCODEPATH
-xcodebuild clean build -configuration Release
-xcodebuild clean build -configuration Debug
+if [[ $1 == "--release" ]]; then
+    echo "build Release"
+    xcodebuild clean build -configuration Release
+else
+    echo "build Release"
+    xcodebuild clean build -configuration Release
+    echo "build Debug"
+    xcodebuild clean build -configuration Debug
+fi
 popd
 
 popd
