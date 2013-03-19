@@ -82,6 +82,18 @@ function installpackages
 	popd
 }
 
+checkout "q" "kriskowal"
+installpackages $MAIN_DIR
+popd
+
+checkout "q-io" "kriskowal"
+installpackages $MAIN_DIR
+popd
+
+checkout "q-connection" "kriskowal"
+installpackages $MAIN_DIR
+popd
+
 checkout "mr" "montagejs"
 installpackages $MAIN_DIR
 # This is a special case for mr
@@ -111,7 +123,7 @@ checkout "montage-testing" "montagejs"
 installpackages $MAIN_DIR
 popd
 
-checkout "montage-native" "montagejs"
+checkout "native" "montagejs"
 installpackages $MAIN_DIR
 popd
 
