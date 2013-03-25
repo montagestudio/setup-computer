@@ -115,11 +115,12 @@ checkout "mousse" "montagejs"
 installpackages $MAIN_DIR
 popd
 
-checkout "montage" "montagejs"
+checkout "montage-testing" "montagejs"
 installpackages $MAIN_DIR
+rm -rf node_modules/montage
 popd
 
-checkout "montage-testing" "montagejs"
+checkout "montage" "montagejs"
 installpackages $MAIN_DIR
 popd
 
