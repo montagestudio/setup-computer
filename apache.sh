@@ -22,6 +22,7 @@ if [[ $ISSERVERINSTALLED == "" ]]; then
 		cat $APACHE_CONFIG_FILE
 	else
 		DOCROOT="$DECLARATIVBASEDIR/declarativ/montage"
+		MONTAGECONFIG="$DECLARATIVBASEDIR/setup/etc"
 		echo -e -n "Listen $MACOSXSERVERPORT\n"\
 "NameVirtualHost *:$MACOSXSERVERPORT\n"\
 "#LogLevel debug\n"\
@@ -37,8 +38,8 @@ if [[ $ISSERVERINSTALLED == "" ]]; then
 "\t</Directory>\n"\
 "\t\n"\
 "\t#Optional touch friendly index page\n"\
-"\tAlias /montage-index $DOCROOT/etc/apache-montage-index\n"\
-"\tInclude $DOCROOT/etc/apache-montage-index/index.conf\n"\
+"\tAlias /montage-index $MONTAGECONFIG/apache-montage-index\n"\
+"\tInclude $MONTAGECONFIG/apache-montage-index/index.conf\n"\
 "\t\n"\
 "\t<IfModule deflate_module>\n"\
 "\t\tSetOutputFilter DEFLATE\n"\
