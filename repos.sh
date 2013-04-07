@@ -156,6 +156,11 @@ checkout "flow-editor" "declarativ"
 installpackages $MAIN_DIR
 popd
 
+checkout "glTF-node-module" "declarativ"
+git submodule update --init --recursive
+installpackages $MAIN_DIR
+popd
+
 checkout "filament" "declarativ"
 # palette and flow-editor are not in npm so we need to hack the package.json file to make it work
 # We should fix that with a private npm repository
