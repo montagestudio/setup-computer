@@ -158,6 +158,9 @@ popd
 
 checkout "glTF-node-module" "declarativ"
 git submodule update --init --recursive
+pushd glTF
+git checkout origin/montage-edge
+popd
 installpackages $MAIN_DIR
 popd
 
