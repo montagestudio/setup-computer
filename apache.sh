@@ -21,7 +21,7 @@ if [[ $ISSERVERINSTALLED == "" ]]; then
 		echo "Apache already configured"
 		cat $APACHE_CONFIG_FILE
 	else
-		DOCROOT="$DECLARATIVBASEDIR/declarativ/montage"
+		DOCROOT="$DECLARATIVBASEDIR/declarativ"
 		MONTAGECONFIG="$DECLARATIVBASEDIR/setup/etc"
 		echo -e -n "Listen $MACOSXSERVERPORT\n"\
 "NameVirtualHost *:$MACOSXSERVERPORT\n"\
