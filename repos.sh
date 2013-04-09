@@ -121,14 +121,17 @@ rm -rf node_modules/montage
 popd
 
 checkout "montage" "montagejs"
+git checkout -b edge origin/edge
 installpackages $MAIN_DIR
 popd
 
 checkout "native" "montagejs"
+git checkout -b edge origin/edge
 installpackages $MAIN_DIR
 popd
 
 checkout "matte" "montagejs"
+git checkout -b edge origin/edge
 installpackages $MAIN_DIR
 popd
 
