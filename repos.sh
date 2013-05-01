@@ -29,10 +29,20 @@ function checkout
 	echo "****************************************"
 	if [[ ! -d $1 ]]; then
 		git clone git@$GITHUBDECLARATIV:$2/$1.git
+		pushd $1
+		git fetch --all
+		git co $BRANCH
+	else
+		pushd $1
+		git fetch --all
 	fi
-	pushd $1
+
+	BRANCH=$3
+	if [[ $BRANCH == "" ]]; then
+		BRANCH="master"
+	fi
+
 	rm -f npm-debug.log
-	git fetch --all
 	branchname=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
 
 	GITSTATUS=`git status --short -u no`
@@ -45,11 +55,11 @@ function checkout
 		exit -1;
 	fi
 
-	if [[ $branchname == "master" ]]; then
-		git rebase remotes/origin/master
-	else
-        git rebase master remotes/origin/master
-		git co $branchname
+	if [[ $branchname == $BRANCH ]]; then
+		git rebase remotes/origin/$BRANCH
+	else 
+		echo "**** WARNING: you are not on the current development branch: $BRANCH for $1"
+		echo "(-> skipping rebase), you have to manually co $BRANCH and rebase."
 	fi
 }
 
@@ -115,27 +125,24 @@ checkout "mousse" "montagejs"
 installpackages $MAIN_DIR
 popd
 
-checkout "montage-testing" "montagejs"
+checkout "montage-testing" "montagejs" "edge"
 installpackages $MAIN_DIR
 rm -rf node_modules/montage
 popd
 
-checkout "montage" "montagejs"
-git checkout -b edge origin/edge
+checkout "montage" "montagejs" "edge"
 installpackages $MAIN_DIR
 popd
 
-checkout "native" "montagejs"
-git checkout -b edge origin/edge
+checkout "native" "montagejs" "edge"
 installpackages $MAIN_DIR
 popd
 
-checkout "matte" "montagejs"
-git checkout -b edge origin/edge
+checkout "matte" "montagejs" "edge"
 installpackages $MAIN_DIR
 popd
 
-checkout "digit" "montagejs"
+checkout "digit" "montagejs" "edge"
 installpackages $MAIN_DIR
 popd
 
@@ -159,11 +166,8 @@ checkout "flow-editor" "declarativ"
 installpackages $MAIN_DIR
 popd
 
-checkout "glTF-node-module" "declarativ"
-git submodule update --init --recursive
-pushd glTF
-git checkout origin/montage-edge
-popd
+checkout "glTF-webgl-viewer" "fabrobinet"
+git submodule -b update --init --recursive
 installpackages $MAIN_DIR
 popd
 
