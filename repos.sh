@@ -92,6 +92,11 @@ function installpackages
 	popd
 }
 
+checkout "glTF-node-module" "declarativ"
+installpackages $MAIN_DIR
+popd
+
+
 checkout "q" "kriskowal"
 installpackages $MAIN_DIR
 popd
@@ -170,6 +175,8 @@ checkout "glTF-webgl-viewer" "fabrobinet"
 git submodule -b update --init --recursive
 installpackages $MAIN_DIR
 popd
+
+
 
 checkout "filament" "declarativ"
 # palette and flow-editor are not in npm so we need to hack the package.json file to make it work
