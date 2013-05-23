@@ -30,7 +30,7 @@ if [[ -e $SELFUPDATE ]]; then
 	---
 	$HERE/node-npm.sh
 	---
-	$HERE/glTF-deps.sh
+	# $HERE/glTF-deps.sh
 	---
 	$HERE/git.sh
 	---
