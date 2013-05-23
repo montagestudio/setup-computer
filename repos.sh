@@ -92,11 +92,6 @@ function installpackages
 	popd
 }
 
-checkout "glTF-node-module" "declarativ"
-installpackages $MAIN_DIR
-popd
-
-
 checkout "q" "kriskowal"
 installpackages $MAIN_DIR
 popd
@@ -211,6 +206,8 @@ else
 fi
 popd
 
+
 popd
+
 
 echo "Done $NAME."
