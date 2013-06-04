@@ -74,7 +74,7 @@ function installpackages
 		PROJECTDIR=`pwd`
 	fi
 	rm -rf node_modules
-	npm install
+	npm install -q
 	if [[ ! -d node_modules ]]; then
 		mkdir node_modules
 	fi
