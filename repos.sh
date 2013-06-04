@@ -191,7 +191,7 @@ checkout "lumieres" "declarativ"
 # just clean the node_modules
 pushd lumieres/server/
 rm -rf node_modules
-npm install
+npm install -q
 popd
 XCODEPATH=`xcode-select --print-path`
 echo "build lumières using "$XCODEPATH
