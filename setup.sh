@@ -38,7 +38,7 @@ if [[ -e $SELFUPDATE ]]; then
 	---
 	$HERE/bash-profile.sh
 	---
-	$HERE/repos.sh
+	$HERE/repos.sh ${1}
 	---
 	# Apache need the project in place or the configuration will fail
 	$HERE/apache.sh
@@ -48,8 +48,8 @@ if [[ -e $SELFUPDATE ]]; then
 else
 	touch $SELFUPDATE
 	
-	RELAUNCH="${BASH_SOURCE[0]}"
-	
+	RELAUNCH="${BASH_SOURCE[0]} ${1}"
+
 	pushd $HERE
 	git fetch --all
 	GITSTATUS=`git status --short`

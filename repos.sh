@@ -73,6 +73,12 @@ function installpackages
 	if [[ $PROJECTDIR == "" ]]; then
 		PROJECTDIR=`pwd`
 	fi
+	# palette and flow-editor are not in npm so we need to hack the package.json file to make it work
+	# We should fix that with a private npm repository
+	mv package.json package.json.saved
+	cat package.json.saved | sed s/git@github.com/git@$GITHUBDECLARATIV/ > package.json
+	rm package.json.saved
+
 	rm -rf node_modules
 	npm install -q
 	if [[ ! -d node_modules ]]; then
@@ -90,6 +96,9 @@ function installpackages
 		done
 	fi
 	popd
+
+	# cleanup after ourselves
+	git co -- package.json
 }
 
 checkout "q" "kriskowal"
@@ -125,24 +134,24 @@ checkout "mousse" "montagejs"
 installpackages $MAIN_DIR
 popd
 
-checkout "montage-testing" "montagejs" "edge"
+checkout "montage-testing" "montagejs"
 installpackages $MAIN_DIR
 rm -rf node_modules/montage
 popd
 
-checkout "montage" "montagejs" "edge"
+checkout "montage" "montagejs"
 installpackages $MAIN_DIR
 popd
 
-checkout "native" "montagejs" "edge"
+checkout "native" "montagejs"
 installpackages $MAIN_DIR
 popd
 
-checkout "matte" "montagejs" "edge"
+checkout "matte" "montagejs"
 installpackages $MAIN_DIR
 popd
 
-checkout "digit" "montagejs" "edge"
+checkout "digit" "montagejs"
 installpackages $MAIN_DIR
 popd
 
@@ -162,28 +171,20 @@ installpackages $MAIN_DIR
 popd
 popd
 
-checkout "flow-editor" "declarativ"
+checkout "flow-editor" "declarativ" "edge-matte"
 installpackages $MAIN_DIR
 popd
 
 checkout "glTF-webgl-viewer" "fabrobinet"
-git submodule -b update --init --recursive
+# [PJYF June 18 2013] This does not look right
+git submodule init
+git submodule update --recursive
+#
 installpackages $MAIN_DIR
 popd
 
-
-
 checkout "filament" "declarativ"
-# palette and flow-editor are not in npm so we need to hack the package.json file to make it work
-# We should fix that with a private npm repository
-cp package.json package.json.saved
-cat package.json.saved | sed s/github.com/$GITHUBDECLARATIV/ > package.json
-
 installpackages $MAIN_DIR
-
-# cleanup after ourselves
-rm -rf package.json
-mv package.json.saved package.json
 popd
 
 checkout "lumieres" "declarativ"
@@ -201,8 +202,6 @@ if [[ $1 == "build" ]]; then
 fi
 popd
 
-
 popd
-
 
 echo "Done $NAME."

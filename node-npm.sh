@@ -16,7 +16,7 @@ mkdir -p $TMP_DIR
 
 NODEWEBSITE="http://nodejs.org/dist/latest/"
 
-NODEINSTALLER=`curl -s $NODEWEBSITE | grep "pkg" | cut -d'>' -f 2 | cut -d'<' -f 1`
+NODEINSTALLER=`curl -s $NODEWEBSITE | grep "\.pkg" | cut -d'>' -f 2 | cut -d'<' -f 1`
 NODEVERSION=`echo $NODEINSTALLER | cut -d'-' -f 2 | cut -d '.' -f '1 2 3'`
 NODEURL=$NODEWEBSITE$NODEINSTALLER
 CURRENTNODEVERSION=`node --version`
