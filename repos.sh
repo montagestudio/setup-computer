@@ -171,7 +171,7 @@ installpackages $MAIN_DIR
 popd
 popd
 
-checkout "flow-editor" "declarativ" "edge-matte"
+checkout "flow-editor" "declarativ"
 installpackages $MAIN_DIR
 popd
 
