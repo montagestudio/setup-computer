@@ -6,7 +6,7 @@ NAME="command line tools install"
 
 echo "Start $NAME..."
 
-XCODEVERSION=`xcodebuild -showsdks | grep -i "10.7"`
+XCODEVERSION=`xcodebuild -showsdks | grep -i "macosx"`
 
 if [[ $XCODEVERSION == "" ]]; then
 
