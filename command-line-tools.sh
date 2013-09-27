@@ -10,9 +10,8 @@ XCODEVERSION=`xcodebuild -showsdks | grep -i "macosx"`
 
 if [[ $XCODEVERSION == "" ]]; then
 
-	#open files/xcode452cltools10_86938211a.dmg
-	echo "* Get xcode452cltools10_86938211a.dmg from someone"
-	echo "* Open the installer pkg"
+	echo "* Get Xcode and install the command line tools"
+	echo "* Menu Preferences… tab Locations"
 	echo "* Press enter when the install is complete"
 	read
 else
