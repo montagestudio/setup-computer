@@ -184,7 +184,6 @@ installpackages $MAIN_DIR
 popd
 
 checkout "filament" "declarativ"
-installpackages $MAIN_DIR
 popd
 
 checkout "lumieres" "declarativ"
