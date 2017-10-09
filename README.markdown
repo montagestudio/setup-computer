@@ -1,17 +1,17 @@
-Declarativ Macbook setup
+Macbook setup
 ========================
 
-The repo contains a number of script to make setting up a Declarativ Macbook
+The repo contains a number of script to make setting up a Macbook
 easy, and to enable you maintaining a regular build of lumières.
 
 Instructions
 ------------
 
 Create a new directory, open the terminal and cd into it.
-git clone git@github.com:declarativ/setup.git
+git clone git@github.com:montagestudio/setup.git
 then run setup/setup/sh
 
-This will create two directories in the same folder on is declarativ 
+This will create two directories in the same folder on is montagestudio 
 with all the projects setup for live updates and on is bin with some 
 command line addition to make your github life easier.
 
